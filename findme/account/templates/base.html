@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+ <title>{% block title %}{% endblock %}</title>
+<link href="{% static "css/index.css" %}" rel="stylesheet">
+ <link href="{% static "css/global.css" %}" rel="stylesheet">
+ <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;0,800;1,500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+    />
+</head>
+<body>
+
+{% if messages %}
+ <ul class="messages">
+ {% for message in messages %}
+ <li class="{{ message.tags }}">
+ {{ message|safe }}
+<a href="#" class="close">x</a>
+ </li>
+ {% endfor %}
+ </ul>
+ {% endif %}
+
+ <div id="header">
+ {% if request.user.is_authenticated %}
+ <ul class="menu">
+ <li {% if section == "dashboard" %}class="selected"{% endif %}>
+ <a href="{% url "dashboard" %}">My dashboard</a>
+ </li>
+ <li {% if section == "images" %}class="selected"{% endif %}>
+ <a href="#">Images</a>
+ </li>
+ <li {% if section == "people" %}class="selected"{% endif %}>
+ <a href="#">People</a>
+ </li>
+ </ul>
+ {% endif %}
+ <span class="user">
+
+
+ </span>
+ </div>
+  {% if messages %}
+ <ul class="messages">
+ {% for message in messages %}
+ <li class="{{ message.tags }}">
+ {{ message|safe }}
+<a href="#" class="close">x</a>
+ </li>
+ {% endfor %}
+ </ul>
+ {% endif %}
+ <div id="content">
+ {% block content %}
+ {% endblock %}
+ </div>
+
+
+
+</body>
+</html>
